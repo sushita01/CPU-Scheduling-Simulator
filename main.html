@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Scheduling Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contain">
+        <h1>CPU Scheduling Simulator</h1>
+        <div class="options">
+            <label for="Algorithm">Select Algorithm:
+            <select name="Algorithm" id="Algorithm">
+                <option>Select an algorithm</option>
+                <option value="FCFS">First Come First Serve (FCFS)</option>
+                <option value="SJF">Shortest Job First (SJF)</option>
+                <option value="SRTF">Shortest Remaining Time First (SRTF)</option>
+                <option value="Priority">Priority (Preemptive)</option>
+                <option value="RR">Round Robin (RR)</option>
+            </select>
+        </label>
+        </div>
+
+        <form id="inputs" action="input">
+            <br>
+            <label for="pid">Enter Process ID: </label>
+            <input type="text" name="pid" id="pid" placeholder="Process ID (PID)">
+            <br><br>
+            <label for="AT">Enter Arrival Time: </label>
+            <input type="text" name="AT" id="AT" placeholder="Arrival Time (AT)">
+            <br><br>
+            <label for="BT">Enter Burst Time: </label>
+            <input type="text" name="BT" id="BT" placeholder="Burst Time (BT)">
+            <br><br>
+            <label for="priority">Enter Priority:</label>
+            <input type="text" name="priority" id="priority" placeholder="Highest number=Highest priority">
+            <br><br>
+            <label for="TQ">Enter Time Quantum: </label>
+            <input type="text" name="TQ" id="TQ" placeholder="Time Quantum">
+            <br><br>
+            <button type="submit" id="submits">Add Process</button>
+            <button type="button" id="calculate">Calculate</button>
+        </form>
+    </div>
+
+    <section>
+        <table id="resultTable">
+            <tr>
+                <th>Processes</th>
+                <th>AT</th>
+                <th>BT</th>
+                <th>Priority</th>
+                <th>CT</th>
+                <th>TAT</th>
+                <th>WT</th>
+            </tr>
+        </table>
+        <div id="gantt" style="margin-top:20px; margin-bottom: 20px; font-weight:bold; font-size:16px;"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
