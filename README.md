@@ -40,7 +40,8 @@ The simulator supports the following CPU scheduling algorithms:
 - Automatic calculation of:
   - Completion Time (CT)  
   - Turnaround Time (TAT)  
-  - Waiting Time (WT)  
+  - Waiting Time (WT)
+- Gantt Chart visualization of CPU execution
 - Clean and simple user interface  
 
 
@@ -58,7 +59,9 @@ The frontend allows users to input the following:
   - Required for Round Robin scheduling  
 
 
-## Output Table
+## Output 
+
+### Table
 
 After calculation, results are displayed in a table with the following columns:
 
@@ -66,11 +69,22 @@ After calculation, results are displayed in a table with the following columns:
 |--------|----|----|----------|----|-----|----|
 
 
+### 📈 Gantt Chart
+
+- Displays the *exact execution order* of processes  
+- Shown in sequential format such as:
+P0 → P1 → P2 → P3 → P1 → P4
+
+- Clearly represents:
+  - CPU allocation order  
+  - Preemption behavior (SRTF, Priority)  
+  - Time slicing (Round Robin)
+
 ## Technologies Used
 
 - **HTML** – Structure of the simulator  
 - **CSS** – Styling and layout  
-- **JavaScript** – Core scheduling logic and calculations  
+- **JavaScript** – - Scheduling logic, calculations, and Gantt Chart rendering   
 
 
 ## How It Works
@@ -84,7 +98,9 @@ After calculation, results are displayed in a table with the following columns:
    - Time Quantum (for Round Robin)  
 3. User clicks **Add Process** to add processes.  
 4. User clicks **Calculate** to execute the scheduling algorithm.  
-5. Results are displayed in a structured table showing CT, TAT, and WT.  
+5. Results are displayed in a structured table showing CT, TAT, and WT.
+    - Process table  
+    - Gantt Chart execution flow  
 
 
 ## Academic Integrity Notice
