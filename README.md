@@ -1,13 +1,5 @@
 # CPU Scheduling Simulator
 
-⚠️ Copyright Notice
-
-© 2025 Sushita Roy Chowdhury. All rights reserved.
-
-This repository and its source code are the intellectual property of **Sushita Roy Chowdhury**.  
-The code is shared strictly for academic evaluation purposes. Unauthorized copying, reposting, or public redistribution is prohibited.
-
-
 ## Project Overview
 
 CPU Scheduling Simulator is a university Operating Systems project designed to demonstrate and visualize how different CPU scheduling algorithms work.  
@@ -106,13 +98,9 @@ P0 → P1 → P2 → P3 → P1 → P4
 ## Academic Integrity Notice
 
 This project was developed as part of a **university Operating Systems course**.  
-The source code is intended **only for learning, demonstration, and evaluation purposes**.  
-Reuse, redistribution, or commercial use is **not permitted**.
+The source code is intended **only for learning, demonstration, and evaluation purposes**.
 
 
 ## Notes
 
-- This project was created strictly for **academic purposes**.  
-- All logic, design, and implementation are authored by **Sushita Roy Chowdhury**.  
-- Unauthorized public sharing, copying, or reposting is **strictly prohibited**.
-
+- This project was created strictly for **academic purposes**. 
