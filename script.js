@@ -142,57 +142,69 @@ function priority_pre(p) {
 
 // RR
 function rr(p, tq) {
-    let n = p.length; 
-    let time = 0, p_completed = 0; 
-    let completed = new Array(n).fill(0); 
-    let in_queue = new Array(n).fill(0); 
-    let q = []; 
-    let gantt = ""; 
-    for (let i = 0; i < n; i++) {
-        if (p[i].at === 0) {
-            q.push(i);
-            in_queue[i] = 1;
-        }
-    }
-    while (p_completed !== n) {
-        if (q.length === 0) { 
-            time++;
-            continue;
-        }
-        let current_p = q.shift(); 
-        in_queue[current_p] = 0; 
-        gantt += "P" + p[current_p].id + " -> "; 
-        if (p[current_p].rbt > tq) {
-            p[current_p].rbt -= tq;
-            time += tq;
-            for (let i = 0; i < n; i++) {
-                if (p[i].at <= time && completed[i] === 0 && in_queue[i] === 0 && i !== current_p) {
-                    q.push(i);
-                    in_queue[i] = 1;
-                }
-            }
-            q.push(current_p);
-            in_queue[current_p] = 1;
+    const n = p.length;
+    let time = 0;
+    let completedCount = 0;
 
-        } 
-        else {
-            time += p[current_p].rbt;
-            p[current_p].rbt = 0;
-            p[current_p].ct = time;
-            p[current_p].tat = p[current_p].ct - p[current_p].at;
-            p[current_p].wt = p[current_p].tat - p[current_p].bt;
-            completed[current_p] = 1; 
-            p_completed++;
-            for (let i = 0; i < n; i++) {
-                if (p[i].at <= time && completed[i] === 0 && in_queue[i] === 0 && i !== current_p) {
-                    q.push(i);
-                    in_queue[i] = 1;
+    const completed = new Array(n).fill(false);
+    const inQueue = new Array(n).fill(false);
+    const queue = [];
+    let gantt = "";
+
+    const order = Array.from({ length: n }, (_, i) => i)
+        .sort((a, b) => p[a].at - p[b].at);
+
+    let next = 0;
+
+    while (completedCount < n) {
+
+        if (queue.length === 0) {
+            if (next < n && time < p[order[next]].at) {
+                time = p[order[next]].at;
+            }
+
+            while (next < n && p[order[next]].at <= time) {
+                const idx = order[next++];
+                if (!completed[idx] && !inQueue[idx]) {
+                    queue.push(idx);
+                    inQueue[idx] = true;
                 }
             }
         }
+
+        const current = queue.shift();
+        inQueue[current] = false;
+
+        const runTime = Math.min(tq, p[current].rbt);
+        gantt += "P" + p[current].id + " -> ";
+
+        time += runTime;
+        p[current].rbt -= runTime;
+
+        while (next < n && p[order[next]].at <= time) {
+            const idx = order[next++];
+            if (!completed[idx] && !inQueue[idx]) {
+                queue.push(idx);
+                inQueue[idx] = true;
+            }
+        }
+
+        if (p[current].rbt === 0) {
+            completed[current] = true;
+            completedCount++;
+
+            p[current].ct = time;
+            p[current].tat = p[current].ct - p[current].at;
+            p[current].wt = p[current].tat - p[current].bt;
+        } else {
+            queue.push(current);
+            inQueue[current] = true;
+        }
     }
+
     return gantt;
 }
+
 
 document.getElementById("calculate").addEventListener("click", function() {
     let algo = document.getElementById("Algorithm").value;
